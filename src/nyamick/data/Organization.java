@@ -1,17 +1,16 @@
-package nyamick;
+package nyamick.data;
+
+import nyamick.State;
 
 import java.util.Random;
 
 public abstract class Organization {
     private final String name;
-
     public Organization(String name) {
         this.name = name;
     }
+    public String getName() { return name; }
 
-    public String getName() {
-        return name;
-    }
 
     protected String getObjetName() {
         int leftLimit = 97; // letter 'a'
@@ -26,9 +25,13 @@ public abstract class Organization {
 
         return buffer.toString();
     }
+    public int getCount() { return State.organizations.size(); }
+    public Organization getOrganization (int index) { return  State.organizations.get(index); }
 
 
-    public abstract void processOperation();
+    public abstract String processOperation();
 }
+
+
 
 

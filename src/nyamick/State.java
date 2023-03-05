@@ -1,51 +1,48 @@
 package nyamick;
 
+import nyamick.data.Organization;
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
+import java.util.random.RandomGenerator;
 
 public class State {
+    public static final ArrayList<Organization> organizations = new ArrayList<>();
 
-    protected static final ArrayList<Organization> companies = new ArrayList<Organization>();
-
-    public static void deleteSelectedCompany(String name) {
-        for (Organization company: companies) {
-            if (company.getName() == null ? name == null : company.getName().equals(name)) {
-                companies.remove(company);
-                System.out.println("Успешно удалено!");
-                return;
-            }
-        }
-        System.out.println("Компании с выбранным именем не существует!");
+    public Organization getOrganization(int index) {
+        return organizations.get(index);
     }
 
-    public static void doSelectedActivity(String name) {
-
-        for (Organization company: companies) {
+    public static void deleteSelectedCompany(int ind) {
+        organizations.remove(ind);
+    }
+    public static String doSelectedActivity(int ind) {
+        Organization org = organizations.get(ind);
+        String name = org.getName();
+        for (Organization company: organizations) {
             if (company.getName() == null ? name == null : company.getName().equals(name)) {
-                company.processOperation();
-                return;
+                return company.processOperation();
             }
         }
-        System.out.println("Компании с выбранным именем не существует!");
+        return null;
     }
-
-    public static void doAllActivities() {
-        if (companies.isEmpty()) {
-            System.out.println("Для этого добавьте хотя бы одну компанию...");
+    public static void doAllActivities(){
+        if(organizations.isEmpty()){
+            System.out.println("бом бом...");
             return;
         }
         System.out.println();
-        for (Organization company: companies) {
-            company.processOperation();
-        }
+        for (Organization organization: organizations) { organization.processOperation();}
         System.out.println();
     }
 
-    public static void getCompaniesList() {
+    public static void getOrganizationsList(){
         System.out.println();
-        for (int i = 0; i < companies.size(); i++) {
-            System.out.println((i + 1) + " - " + companies.get(i).getName());
-        }
+        for(int i = 0; i < organizations.size(); i++) { System.out.println((i + 1) + " - " + organizations.get(i).getName()); }
         System.out.println();
     }
+
+
 }
+
 
