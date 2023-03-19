@@ -9,12 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.Kernel;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class MainWindow extends  JFrame{
     private  final JTable jTable;
     private final MyTableModel myTableModel;
     private final JTextField nameField;
     private final JComboBox orgType;
     private final JTextField actField;
+    State state;
 
     public MainWindow() {
         super("Companies");
@@ -51,11 +54,19 @@ public class MainWindow extends  JFrame{
             myTableModel.add(nameField.getText(), type);
         });
 
+
         JButton doAct = new JButton("Выполнить действие");
         doAct.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actField.setText(myTableModel.doActivity(jTable.getSelectedRow()));
+            }
+        });
+        JButton find = new JButton("Поиск");
+        find.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showMessageDialog(null, myTableModel.find(nameField.getText()));
             }
         });
 
@@ -72,6 +83,8 @@ public class MainWindow extends  JFrame{
         panel.add(orgType);
         panel.add(nameField);
         panel.add(buttonDelete);
+        panel.add(find);
+
         panelR.add(doAct);
         panelR.add(actField);
         this.add(panelR, BorderLayout.NORTH);

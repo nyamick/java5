@@ -5,6 +5,7 @@ import nyamick.data.InsuranceCompany;
 import nyamick.data.Organization;
 import nyamick.data.ShipbuildingCompany;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 public class MyTableModel extends AbstractTableModel {
@@ -47,22 +48,22 @@ public class MyTableModel extends AbstractTableModel {
       }
 
       public void add(String name, String ind){
-        switch (ind) {
-            case "Shipbuilding Company":
-                State.organizations.add(new ShipbuildingCompany(name));
-                break;
-            case "Insurance Company":
-                State.organizations.add(new InsuranceCompany(name));
-                break;
-            case "Aircraft Factory":
-                State.organizations.add(new AircraftFactory(name));
-                break;
-            default:
-                State.organizations.add(new AircraftFactory("default"));
-        }
+          switch (ind) {
+              case "Shipbuilding Company" -> State.organizations.add(new ShipbuildingCompany(name));
+              case "Insurance Company" -> State.organizations.add(new InsuranceCompany(name));
+              case "Aircraft Factory" -> State.organizations.add(new AircraftFactory(name));
+              default -> State.organizations.add(new AircraftFactory("default"));
+          }
           this.fireTableDataChanged();
       }
-      public String doActivity(int ind) {return State.doSelectedActivity(ind);}
+      public String find(String name) {
+          return State.findAct(name);
+      }
+
+      public String doActivity(int ind) {return State.doSelectedActivity(ind);
+
+    }
+
     }
 
 

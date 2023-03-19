@@ -26,6 +26,14 @@ public class State {
         }
         return null;
     }
+    public static String findAct(String name) {
+        for (Organization company: organizations) {
+            if (company.getName() == null ? name == null : company.getName().equals(name)) {
+                return company.processOperation();
+            }
+        }
+        return ("Компании с выбранным именем не существует!");
+    }
     public static void doAllActivities(){
         if(organizations.isEmpty()){
             System.out.println("бом бом...");
@@ -41,6 +49,9 @@ public class State {
         for(int i = 0; i < organizations.size(); i++) { System.out.println((i + 1) + " - " + organizations.get(i).getName()); }
         System.out.println();
     }
+
+
+
 
 
 }
